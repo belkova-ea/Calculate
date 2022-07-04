@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Calculate"
         mc:Ignorable="d" Height="380" Width="502" Background="#FF6C9DBF" ResizeMode="NoResize" Title="Калькулятор" Foreground="{x:Null}" KeyDown="Window_KeyDown" >
     <Grid Margin="10,12,10,12">
-        <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="30" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="#FFDDF0FD" BorderBrush="White" Foreground="#FF283E4F" FontSize="20" Cursor="" SelectionOpacity="-3" TextAlignment="Right" Text="0"/>
+        <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="30" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="#FFDDF0FD" BorderBrush="White" Foreground="#FF0D1820" FontSize="20" Cursor="" SelectionOpacity="-3" TextAlignment="Right" Text="0" IsEnabled="False"/>
         <Button x:Name="MC" Content="MC" HorizontalAlignment="Left" Height="35" Margin="10,72,0,0" VerticalAlignment="Top" Width="34" Background="#FFBDE4FF" BorderBrush="White" FontSize="18" FontWeight="Normal" Foreground="#FF283E4C" Click="MC_Click"/>
         <Button x:Name="MR" Content="MR" HorizontalAlignment="Left" Height="35" Margin="50,72,0,0" VerticalAlignment="Top" Width="34" Background="#FFBDE4FF" BorderBrush="White" FontSize="18" FontWeight="Normal" Foreground="#FF283E4C" Click="MR_Click"/>
         <Button x:Name="str" Content="🢠" HorizontalAlignment="Left" Height="35" Margin="10,112,0,0" VerticalAlignment="Top" Width="34" Background="#FFBDE4FF" BorderBrush="White" FontSize="18" FontWeight="Normal" Foreground="#FF283E4C" Click="str_Click"/>
@@ -35,7 +35,7 @@
         <Button x:Name="znak" Content="," HorizontalAlignment="Left" Height="35" Margin="90,273,0,0" VerticalAlignment="Top" Width="34" Background="#FFBDE4FF" BorderBrush="White" FontSize="18" FontWeight="Normal" Foreground="#FF283E4C" Click="znak_Click"/>
         <Button x:Name="Plus" Content="+" HorizontalAlignment="Left" Height="35" Margin="130,273,0,0" VerticalAlignment="Top" Width="34" Background="#FFBDE4FF" BorderBrush="White" FontSize="18" FontWeight="Normal" Foreground="#FF283E4C" Click="Plus_Click"/>
         <Button x:Name="bt0" Content="0" HorizontalAlignment="Left" Height="35" Margin="10,273,0,0" VerticalAlignment="Top" Width="74" Background="#FFBDE4FF" BorderBrush="White" FontSize="20" FontWeight="Normal" Foreground="#FF283E4C" Click="bt0_Click"/>
-        <TextBox x:Name="MemoryBox" HorizontalAlignment="Left" Height="21" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF283E4C" Cursor="" SelectionOpacity="-3" TextAlignment="Left"/>
+        <TextBox x:Name="MemoryBox" HorizontalAlignment="Left" Height="21" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0D1820" Cursor="" SelectionOpacity="-3" TextAlignment="Left" IsEnabled="False"/>
         <TextBox x:Name="MBox" HorizontalAlignment="Left" Height="19" Margin="10,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF7A909D"/>
         <Menu VerticalAlignment="Top" HorizontalAlignment="Left" Width="94" Height="21" Margin="-10,-12,0,0" Background="{x:Null}" Foreground="#FF283E4C">
             <MenuItem Header="Вид" Background="#FF6C9DBF" BorderBrush="{x:Null}" Foreground="#FFDDF0FD" FontSize="13">

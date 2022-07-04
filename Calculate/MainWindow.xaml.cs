@@ -130,7 +130,7 @@ namespace Calculate
                 {
                     temp.Push(token.num);
                 }
-                else if (token.type == "op") //Если символ - оператор///////////////////////
+                else if (token.type == "op") //Если символ - оператор
                 {
                     //Берем два последних значения из стека
                     double a = temp.Pop();
@@ -141,7 +141,6 @@ namespace Calculate
                         b = temp.Pop();
                     }
 
-                    //  switch (t.op)
                     switch (token.op) //И производим над ними действие, согласно оператору
                     {
                         case '+': result = b + a; break;
@@ -238,7 +237,7 @@ namespace Calculate
                                 var tns = tokens.ToList();
                                 tns.RemoveAt(tokens.Count() - 1);
                                 var n = RPN.Calculate(tns);
-                                System.Diagnostics.Debug.WriteLine(n);
+                                //System.Diagnostics.Debug.WriteLine(n);
                                 entered_num = (n * (double.Parse(entered_num) / 100)).ToString();
                                 end_input_digit(c);
                                 ret = RPN.Calculate(tokens).ToString();
@@ -331,9 +330,6 @@ namespace Calculate
                             state = "unar";
                             input_digit(c);
                             break;
-                        /*case ')':
-                            state = "cbr";
-                            break;*/
                     }
                     break;
                 case "cbr":
@@ -427,29 +423,15 @@ namespace Calculate
             };
             tokens.Add(t);
         }
-
-        public void Print()
-        {
-            foreach (var t in tokens)
-            {
-                System.Diagnostics.Debug.WriteLine(t.Dump());
-            }
-            System.Diagnostics.Debug.WriteLine("\n");
-        }
-
     }
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
+    
+
     public partial class MainWindow : Window
     {
 
-        double A = 0, B = 0, MEMORY_CELL = 0, BUFFER, TEMP_COPY;
-        bool FLAG_EQUAL_CLICKED = false, FLAG_LOG_VISIBLE = false, FLAG_BUFFER_IS_FULL = false;
-        byte COUNTER = 1;
-        short OPERATION_ID = 0;
+        double MEMORY_CELL = 0;
+        bool FLAG_LOG_VISIBLE = false;
         int SELECTED_ROW = 0;
 
         Parser parser = new();
@@ -477,6 +459,7 @@ namespace Calculate
             Application.Current.MainWindow.Width = 250;
         }
 
+
         private string MboxText()
         {
             Stack<string> ns = new();
@@ -495,7 +478,6 @@ namespace Calculate
                 else if (t.type == "number")
                 {
                     ns.Push(t.num.ToString());
-                    //mbox = mbox + t.num.ToString();
                 }
             }
             if (ns.Count != 0)
@@ -504,6 +486,7 @@ namespace Calculate
             }
             return mbox;
         }
+
 
         private void InputChar(char c)
         {
@@ -525,9 +508,8 @@ namespace Calculate
             var textbox_value = parser.Parse(c);
             TextBox.Text = textbox_value.ToString();
             MemoryBox.Text = MboxText();
-
-            parser.Print();
         }
+
 
         private void bt1_Click(object sender, RoutedEventArgs e)
         {
@@ -593,6 +575,7 @@ namespace Calculate
         {
             InputChar('/');
         }
+
         private void OneDelX_Click(object sender, RoutedEventArgs e)
         {
             var final_value = double.Parse(parser.Parse('='));
@@ -614,6 +597,8 @@ namespace Calculate
             TextBox.Text = t.num.ToString();
             MemoryBox.Text = "1/" + final_value.ToString();
         }
+
+
         private void Root_Click(object sender, RoutedEventArgs e)
         {
             var final_value = double.Parse(parser.Parse('='));
@@ -635,10 +620,14 @@ namespace Calculate
             TextBox.Text = t.num.ToString();
             MemoryBox.Text = "sqrt(" + final_value.ToString() + ")";
         }
+
+
         private void proc_b_Click(object sender, RoutedEventArgs e)
         {
             InputChar('%');
         }
+
+
         private void PlusMinus_Click(object sender, RoutedEventArgs e)
         {
             var final_value = double.Parse(parser.Parse('='));
@@ -661,18 +650,23 @@ namespace Calculate
             MemoryBox.Clear();
         }
 
+
         private void CE_Click(object sender, RoutedEventArgs e)
         {
             TextBox.Clear();
             TextBox.Text = "0";
             parser.entered_num = "0";
         }
+
+
         private void C_Click(object sender, RoutedEventArgs e)
         {
             MemoryBox.Clear();
             TextBox.Text = "0";
             parser = new();
         }
+
+
         private void str_Click(object sender, RoutedEventArgs e)
         {
             string n = parser.entered_num;
@@ -683,13 +677,14 @@ namespace Calculate
 
             TextBox.Text = parser.entered_num;
         }
+
+
         private void MC_Click(object sender, RoutedEventArgs e)
         {
             MEMORY_CELL = 0;
             Brush temp = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF283E4C"));
             MS.Foreground = temp;
         }
-
 
 
         private void MR_Click(object sender, RoutedEventArgs e)
@@ -702,25 +697,29 @@ namespace Calculate
             {
                 InputChar(c);
             }
-            //TextBox.Text = parser.entered_num = MEMORY_CELL.ToString();
         }
+
+
         private void MS_Click(object sender, RoutedEventArgs e)
         {
             MEMORY_CELL = double.Parse(parser.entered_num);
             Brush temp = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#46A05A"));
             MS.Foreground = temp;
         }
+
+
         private void Mplus_Click(object sender, RoutedEventArgs e)
         {
             MemoryBox.Clear();
             MEMORY_CELL += double.Parse(TextBox.Text);
         }
+
+
         private void Mminus_Click(object sender, RoutedEventArgs e)
         {
             MemoryBox.Clear();
             MEMORY_CELL -= double.Parse(TextBox.Text);
         }
-
 
 
         private void Log_Click(object sender, RoutedEventArgs e)
@@ -739,6 +738,7 @@ namespace Calculate
             }
         }
 
+
         private void Copy_Log_Click(object sender, RoutedEventArgs e)
         {
             string temp = "";
@@ -755,6 +755,7 @@ namespace Calculate
             Clipboard.SetText(temp);
         }
 
+
         private void MenuItem_Click(object sender, RoutedEventArgs e) //Правка - Копировать
         {
             if (TextBox.Text.Length > 0)
@@ -762,6 +763,7 @@ namespace Calculate
                 Clipboard.SetText(TextBox.Text);
             }
         }
+
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e) //Правка - Вставить
         {
@@ -774,10 +776,14 @@ namespace Calculate
                 InputChar(c);
             }
         }
+
+
         private void Clear_Log_Click(object sender, RoutedEventArgs e)
         {
             History.Items.Clear();
         }
+
+
         private void Change_Log_Click(object sender, RoutedEventArgs e)
         {
             if (History.SelectedItem != null)
@@ -789,6 +795,8 @@ namespace Calculate
                 SELECTED_ROW = History.SelectedIndex;
             }
         }
+
+
         private void Change_Item_Button_Click(object sender, RoutedEventArgs e)
         {
             string temp = Change_Item_TextBox.Text.Substring(0, Change_Item_TextBox.Text.IndexOf('='));
@@ -799,80 +807,7 @@ namespace Calculate
             Change_Item_Button.Visibility = Visibility.Collapsed;
         }
 
-        short GET_OPERATION_ID(short last_pos)
-        {
-            if (COUNTER < 3 && FLAG_BUFFER_IS_FULL == false)
-            {
-                if (TextBox.Text.Length > 0)
-                {
-                    if (MemoryBox.Text.Contains("+"))
-                    {
-                        BUFFER = double.Parse(TextBox.Text);
-                        return (10);
-                    }
-
-                    if (MemoryBox.Text.Contains("-"))
-                    {
-                        BUFFER = double.Parse(TextBox.Text);
-                        return (20);
-                    }
-
-                    if (MemoryBox.Text.Contains("*"))
-                    {
-                        BUFFER = double.Parse(TextBox.Text);
-                        return (30);
-                    }
-
-                    if (MemoryBox.Text.Contains("/"))
-                    {
-                        BUFFER = double.Parse(TextBox.Text);
-                        return (40);
-                    }
-                }
-                else
-                {
-                    if (MemoryBox.Text.Contains("+"))
-                    {
-                        BUFFER = double.Parse(MemoryBox.Text.Substring(0, MemoryBox.Text.IndexOf("+") - 1));
-                        return (11);
-                    }
-
-                    if (MemoryBox.Text.Contains("-"))
-                    {
-                        BUFFER = double.Parse(MemoryBox.Text.Substring(0, MemoryBox.Text.IndexOf("-") - 1));
-                        return (21);
-                    }
-
-                    if (MemoryBox.Text.Contains("*"))
-                    {
-                        BUFFER = double.Parse(MemoryBox.Text.Substring(0, MemoryBox.Text.IndexOf("*") - 1));
-                        return (31);
-                    }
-
-                    if (MemoryBox.Text.Contains("/"))
-                    {
-                        BUFFER = double.Parse(MemoryBox.Text.Substring(0, MemoryBox.Text.IndexOf("/") - 1));
-                        return (41);
-                    }
-                }
-            }
-
-            if (MemoryBox.Text.Length == 0 && FLAG_BUFFER_IS_FULL == false)
-            {
-                if (TextBox.Text.Length == 0)
-                {
-                    return (0);
-                }
-                else
-                {
-                    return (1);
-                }
-
-            }
-
-            return (last_pos);
-        }
-
+        
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -970,6 +905,7 @@ namespace Calculate
                     MemoryBox.Clear();
                     break;
             }
+
         }
     }
 }
