@@ -159,7 +159,6 @@ namespace Calculate
     public class Parser
     {
         public string state = "null";
-        int open_brackets = 0;
 
         public string entered_num = "0";
         public List<Token> tokens = new();
@@ -185,7 +184,7 @@ namespace Calculate
                             break;
                         case '-':
                             state = "unar";
-                            ret = "0";
+                            ret = "0 -";
                             break;
                         case '(':
                             state = "obr";
@@ -227,6 +226,7 @@ namespace Calculate
                             input_operator(c);
                             break;
                         case '=':
+                            //state = "null";
                             end_input_digit(c);
                             ret = RPN.Calculate(tokens).ToString();
                             break;
@@ -282,6 +282,7 @@ namespace Calculate
                             input_operator(c);
                             break;
                         case '=':
+                            //state = "null";
                             end_input_digit_unar(c);
                             ret = RPN.Calculate(tokens).ToString();
                             break;
@@ -294,13 +295,10 @@ namespace Calculate
                         case ',':
                             state = "s_num_unar";
                             input_digit(c);
+                            ret = "0 - " + entered_num.ToString();
                             break;
                         case '(':
                             state = "obr";
-                            break;
-                        case '=':
-                            end_input_digit_unar(c);
-                            ret = RPN.Calculate(tokens).ToString();
                             break;
                     }
                     break;
@@ -507,7 +505,9 @@ namespace Calculate
             
             var textbox_value = parser.Parse(c);
             TextBox.Text = textbox_value.ToString();
+            
             MemoryBox.Text = MboxText();
+            
         }
 
 
